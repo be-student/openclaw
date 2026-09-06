@@ -89,6 +89,7 @@ describe("listGatewayMethods", () => {
       "plugins.controlUi.report",
       "plugins.controlUi.status",
     ]);
+    expect(methods.at(-1)).toBe("session.publicShare.set");
   });
 
   it("advertises ClawHub skill trust methods", () => {
