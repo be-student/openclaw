@@ -428,7 +428,9 @@ async function runManagedServiceManagerBoundary(
         });
         parent.stdin?.end();
       }
-      expect(await completion, stderr).toBe(options.helperExitCode ?? 0);
+      const code = await completion;
+      const helperLog = await fs.readFile(String(generated.logPath), "utf8").catch(() => "");
+      expect(code, `${stderr}\n${helperLog}`).toBe(options.helperExitCode ?? 0);
       await expect(pathExists(updaterPath)).resolves.toBe(
         options.controlDisconnect === "transferred",
       );
